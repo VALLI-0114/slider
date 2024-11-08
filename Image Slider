@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Slider</title>
+<style>
+  /* Container for the slider */
+  .slider-container {
+    position: relative;
+    max-width: 80%;
+    margin: auto;
+    overflow: hidden;
+  }
+
+  /* Slide styling */
+  .slide {
+    display: none;
+    width: 100%;
+  }
+
+  /* Active slide visibility */
+  .slide.active {
+    display: block;
+  }
+
+  /* Previous and Next buttons */
+  .prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  .prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+  }
+
+  .prev {
+    left: 0;
+    border-radius: 3px 0 0 3px;
+  }
+
+  .next {
+    right: 0;
+    border-radius: 0 3px 3px 0;
+  }
+
+  /* Adding some styling to navigation dots */
+  .dot-container {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .dot {
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+  }
+
+  .active-dot {
+    background-color: #717171;
+  }
+</style>
+</head>
+<body>
+
+<div class="slider-container">
+  <!-- Slides -->
+  <div class="slide active">
+    <img src="BHA 2.jpg" style="width:100%">
+    KUCHIPUDI.
+  </div>
+  <div class="slide">
+    <img src="BHA 1.jpg" style="width:100%">
+    BHARATANATYAM.
+  </div>
+  <div class="slide">
+    <img src="BHA 5.jpg" style="width:100%">
+    SATTHRIYA.
+  </div>
+  <div class="slide">
+    <img src="BHA 7.jpg" style="width:100%">
+    MOHINIYATTAM.
+  </div>
+  <div class="slide">
+    <img src="BHA 6.jpg" style="width:100%">
+    ODISSI.
+  </div>
+
+  <!-- Navigation buttons -->
+  <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+  <a class="next" onclick="changeSlide(1)">&#10095;</a>
+</div>
+
+<!-- Dots for navigation -->
+<div class="dot-container">
+  <span class="dot active-dot" onclick="setCurrentSlide(1)"></span>
+  <span class="dot" onclick="setCurrentSlide(2)"></span>
+  <span class="dot" onclick="setCurrentSlide(3)"></span>
+  <span class="dot" onclick="setCurrentSlide(4)"></span>
+  <span class="dot" onclick="setCurrentSlide(5)"></span>
+</div>
+
+<script>
+  let slideIndex = 1;
+  showSlide(slideIndex);
+
+  function changeSlide(n) {
+    showSlide(slideIndex += n);
+  }
+
+  function setCurrentSlide(n) {
+    showSlide(slideIndex = n);
+  }
+
+  function showSlide(n) {
+    let slides = document.getElementsByClassName("slide");
+    let dots = document.getElementsByClassName("dot");
+
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].classList.remove("active");
+    }
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].classList.remove("active-dot");
+    }
+
+    slides[slideIndex - 1].classList.add("active");
+    dots[slideIndex - 1].classList.add("active-dot");
+  }
+</script>
+
+</body>
+</html>
